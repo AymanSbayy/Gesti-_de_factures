@@ -12,7 +12,7 @@ export class Factura {
     unitats;
     preu;
 
-
+    //contructor
     constructor(factura,data,nif,client,telefon,email,descompte,pagat,articles,unitats,preu){
         this.factura = factura;
         this.data = data;
