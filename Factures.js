@@ -12,7 +12,7 @@ function init() {
 		$("#dades_factura").hide();
 	});
 }
-
+as
 
 document.getElementById('factura').addEventListener('submit', function(event) {
     event.preventDefault();
