@@ -1,5 +1,6 @@
 <!doctype html>
 <html lang="ca">
+
 <head>
 	<title>Factures SaPa</title>
 	<meta charset="UTF-8" />
@@ -7,6 +8,7 @@
 	<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 	<script defer src="Factures.js"></script>
 </head>
+
 <body>
 	<div id="main" class="inline">
 		<div class="inline">
@@ -25,38 +27,41 @@
 						<th>E-mail</th>
 						<th>Subtotal</th>
 						<th>Dte</th>
-                        <th>Base l.</th>
-                        <th>IVA</th>
-                        <th>Total</th>
-                        <th>P</th>
-                        <th>ACC</th>
+						<th>Base l.</th>
+						<th>IVA</th>
+						<th>Total</th>
+						<th>P</th>
+						<th>ACC</th>
 					</tr>
 				</thead>
 				<tbody></tbody>
 			</table>
 		</div>
 	</div>
-    <div id="dades_factura" class="dialeg">
+	<div id="dades_factura" class="dialeg">
 		<div class="centrat">
 			<form id="factura">
 				<div id="tancar" class="tancar"><img src="close.svg"></div>
 				<h5>Dades de la factura i del client</h5><br>
-                <br>
-                Núm factura <input type="number" id="num_factura" name="num_factura" required min="0"><br>
-                Data factura <input type="date" id="data_factura" name="data_factura" required>
-                <input type="checkbox" id="pagada" name="pagada"> Pagada<br><br>
-                NIF <input style="width: 15rem;" type="text" id="nif" name="nif" required maxlength="9" pattern="[0-9]{8}[A-Za-z]{1}"><br>
-                Nom <input style="width: 15rem;" type="text" id="nom" name="nom" required><br>
-                Telèfon <input type="tel" id="telefon" name="telefon" required pattern="[0-9]{9}"><br>
-                E-mail <input type="email" id="email" name="email" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"><br><br>
+				<br>
+				Núm factura <input type="number" id="num_factura" name="num_factura" required min="0"><br>
+				Data factura <input type="date" id="data_factura" name="data_factura" required>
+				<input type="checkbox" id="pagada" name="pagada"> Pagada<br><br>
+				NIF <input style="width: 15rem;" type="text" id="nif" name="nif" required maxlength="9"
+					pattern="[0-9]{8}[A-Za-z]{1}"><br>
+				Nom <input style="width: 15rem;" type="text" id="nom" name="nom" required><br>
+				Telèfon <input type="tel" id="telefon" name="telefon" required pattern="[0-9]{9}"><br>
+				E-mail <input type="email" id="email" name="email" required
+					pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$"><br><br>
 
-                % Dte <input type="number" id="dte" name="dte" required min="0" max="100" step="0.01"><br>
-                % IVA <input type="number" id="iva" name="iva" required min="0" max="100" step="0.01"><br>  
+				% Dte <input type="number" id="dte" name="dte" required min="0" max="100" step="0.01"><br>
+				% IVA <input type="number" id="iva" name="iva" required min="0" max="100" step="0.01"><br>
 
-                <input type="submit" id="guardar_factura" value="Guardar">
-            
+				<input type="submit" id="guardar_factura" value="Guardar">
+
 			</form>
 		</div>
 	</div>
 </body>
+
 </html>
