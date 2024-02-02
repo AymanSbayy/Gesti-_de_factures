@@ -45,16 +45,16 @@
 				<h5>Dades de la factura i del client</h5><br>
 				<br>
 				Núm factura <input type="number" id="num_factura" name="num_factura" disabled><br>
-				Data factura <input type="date" id="data_factura" name="data_factura" required>
+				Data factura <input type="date" id="data_factura" name="data_factura" >
 				<input type="checkbox" id="pagada" name="pagada"> Pagada<br><br>
-				NIF <input style="width: 15rem;" type="text" id="nif" name="nif" required maxlength="9"
+				NIF <input style="width: 15rem;" type="text" id="nif" name="nif"  maxlength="9"
 					pattern="[0-9]{8}[A-Za-z]{1}"><br>
-				Nom <input style="width: 15rem;" type="text" id="nom" name="nom" required><br>
-				Telèfon <input type="tel" id="telefon" name="telefon" required pattern="[0-9]{9}"><br>
-				E-mail <input type="email" id="email" name="email" required><br><br>
+				Nom <input style="width: 15rem;" type="text" id="nom" name="nom" ><br>
+				Telèfon <input type="tel" id="telefon" name="telefon"  pattern="[0-9]{9}"><br>
+				E-mail <input type="email" id="email" name="email" ><br><br>
 
-				% Dte <input type="number" id="dte" name="dte" required min="0" max="100" step="0.01"><br>
-				% IVA <input type="number" id="iva" name="iva" required min="0" max="100" step="0.01"><br>
+				% Dte <input type="number" id="dte" name="dte"  min="0" max="100" step="0.01"><br>
+				% IVA <input type="number" id="iva" name="iva"  min="0" max="100" step="0.01"><br>
 
 				<input type="submit" value="Guardar">
 
