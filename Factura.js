@@ -50,51 +50,91 @@ export class Factura {
     tdEmail.textContent = this.email;
     tr.appendChild(tdEmail);
 
+    const tdSubtotal = document.createElement("td");
+    tdSubtotal.textContent = "";
+    tr.appendChild(tdSubtotal);
+
+    const tdDescompte = document.createElement("td");
+    tdDescompte.textContent = this.descompte;
+    tr.appendChild(tdDescompte);
+
+    const tdBaseImp = document.createElement("td");
+    tdBaseImp.textContent = "";
+    tr.appendChild(tdBaseImp);
+
+    const tdIva = document.createElement("td");
+    tdIva.textContent = this.iva;
+    tr.appendChild(tdIva);
+
+    const tdTotal = document.createElement("td");
+    tdTotal.textContent = "";
+    tr.appendChild(tdTotal);
+
     const tdPagat = document.createElement("td");
     tdPagat.textContent = this.pagat ? "Sí" : "No";
     tr.appendChild(tdPagat);
 
-    const tdEditar = document.createElement("td");
+    const tdAcciones = document.createElement("td");
+
     const btnEditar = document.createElement("button");
     btnEditar.id = this.numFactura;
     btnEditar.setAttribute("tagName", "btnEditar");
     const imgEditar = document.createElement("img");
+    imgEditar.setAttribute("tagName", "btnEditar");
     imgEditar.src = "edit.svg";
     imgEditar.alt = "Editar";
     btnEditar.appendChild(imgEditar);
-    tdEditar.appendChild(btnEditar);
-    tr.appendChild(tdEditar);
+    tdAcciones.appendChild(btnEditar);
+    //btnEditar.addEventListener("click", editarFactura(this.numFactura));
 
+    const btnEditArt = document.createElement("button");
+    btnEditArt.id = this.numFactura;
+    btnEditArt.setAttribute("tagName", "btnEditArt");
+    const imgEditArt = document.createElement("img");
+    imgEditArt.setAttribute("tagName", "btnEditArt");
+    imgEditArt.src = "cesta.svg";
+    imgEditArt.alt = "Editar Article";
+    btnEditArt.appendChild(imgEditArt);
+    tdAcciones.appendChild(btnEditArt);
+    btnEditArt.addEventListener("click", );
+    
 
-    const tdImprimir = document.createElement("td");
     const btnImprimir = document.createElement("button");
     btnImprimir.id = this.numFactura;
     btnImprimir.setAttribute("tagName", "btnImprimir");
     const imgImprimir = document.createElement("img");
-    imgImprimir.src = "print.svg";
+    imgImprimir.setAttribute("tagName", "btnImprimir");
+    imgImprimir.src = "printer.svg";
     imgImprimir.alt = "Imprimir";
     btnImprimir.appendChild(imgImprimir);
-    tdImprimir.appendChild(btnImprimir);
-    tr.appendChild(tdImprimir);
+    tdAcciones.appendChild(btnImprimir);
+    //btnImprimir.addEventListener("click", imprimirFactura(this.numFactura));
 
-    const tdEliminar = document.createElement("td");
     const btnEliminar = document.createElement("button");
     btnEliminar.id = this.numFactura;
     btnEliminar.setAttribute("tagName", "btnEliminar");
     const imgEliminar = document.createElement("img");
+    imgEliminar.setAttribute("tagName", "btnEliminar");
     imgEliminar.src = "delete.svg";
     imgEliminar.alt = "Eliminar";
     btnEliminar.appendChild(imgEliminar);
-    tdEliminar.appendChild(btnEliminar);
-    tr.appendChild(tdEliminar);
+    tdAcciones.appendChild(btnEliminar);
+    btnEliminar.addEventListener("click", () => {
+      this.eliminarFactura(this.numFactura);
+  });
+
+    tr.appendChild(tdAcciones);
 
     tbody.appendChild(tr);
   }
 
-  static eliminarFactura(numFactura) {
-    const factura = document.getElementById(numFactura);
-    factura.remove();
-    mostrarFactura();
+  eliminarFactura(numFactura) {
+    const tr = document.getElementById(numFactura).parentElement.parentElement;
+    tr.remove();
+  }
+
+  crearArticle()
+  {
     
   }
 }

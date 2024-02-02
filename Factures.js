@@ -31,15 +31,3 @@ $('#factura').on('submit', function(event) {
     console.log(factura);
 });
 
-document.addEventListener('click', (event) => {
-    if (event.target.tagName === 'BUTTON') {
-        if (event.target.getAttribute("tagName") === "btnEliminar") {
-            Factura.eliminarFactura(event.target.id);
-        } else if (event.target.getAttribute("tagName") === "btnImprimir") {
-            console.log("Imprimir factura");
-        }
-        else if (event.target.getAttribute("tagName") === "btnEditar") {
-            console.log("Editar factura");
-        }
-    }
-});
