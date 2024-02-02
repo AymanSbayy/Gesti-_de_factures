@@ -1,5 +1,7 @@
 "use strict";
 
+import { Factura } from "./Factura.js";
+
 $(document).ready(init);
 
 
@@ -12,22 +14,40 @@ function init() {
 		$("#dades_factura").hide();
 	});
 }
-as
 
-document.getElementById('factura').addEventListener('submit', function(event) {
+
+$('#factura').on('submit', function(event) {
     event.preventDefault();
 
-    const factura = {
-        numFactura: document.getElementById('num_factura').value,
-        dataFactura: document.getElementById('data_factura').value,
-        pagada: document.getElementById('pagada').checked,
-        nif: document.getElementById('nif').value,
-        nom: document.getElementById('nom').value,
-        telefon: document.getElementById('telefon').value,
-        email: document.getElementById('email').value,
-        dte: document.getElementById('dte').value,
-        iva: document.getElementById('iva').value
-    };
+    let dataFactura = document.getElementById('data_factura').value;
+    let pagada = document.getElementById('pagada').checked;
+    let nif = document.getElementById('nif').value;
+    let nom = document.getElementById('nom').value;
+    let telefon = document.getElementById('telefon').value;
+    let email = document.getElementById('email').value;
+    let descompte = parseFloat(document.getElementById('dte').value);
+    let iva = parseFloat(document.getElementById('iva').value);
+    let factura = new Factura(dataFactura, nif, nom, telefon, email, descompte, pagada, iva);
+    console.log(factura);
+});
 
-    gestorFacturas.añadirFactura(factura);
+document.addEventListener('click', (event) => {
+    if (event.target.tagName === 'BUTTON') {
+        const facturaId = event.target.id;
+        
+        switch (facturaId) {
+            case 'btnEditar':
+                
+                break;
+            case 'btnImprimir':
+                
+                break;
+            case 'btnEliminar':
+                
+                break;
+            default:
+                
+                break;
+        }
+    }
 });
