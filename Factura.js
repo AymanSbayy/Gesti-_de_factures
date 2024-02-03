@@ -96,7 +96,7 @@ export class Factura {
     imgEditArt.alt = "Editar Article";
     btnEditArt.appendChild(imgEditArt);
     tdAcciones.appendChild(btnEditArt);
-    btnEditArt.addEventListener("click", );
+   // btnEditArt.addEventListener("click", );
     
 
     const btnImprimir = document.createElement("button");
@@ -133,8 +133,17 @@ export class Factura {
     tr.remove();
   }
 
+
+
+
+
+
+
+
+
+  /*
   crearArticle()
   {
     
-  }
+  }*/
 }
