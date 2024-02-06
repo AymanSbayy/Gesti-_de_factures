@@ -24,6 +24,8 @@ export class Factura {
     this.cesta.push(articulo);
   }
 
+  static arrayFactures = [];
+
   mostrarFactura() {
     const tbody = document.querySelector("table tbody");
     const tr = document.createElement("tr");
@@ -111,6 +113,12 @@ export class Factura {
     imgImprimir.alt = "Imprimir";
     btnImprimir.appendChild(imgImprimir);
     tdAcciones.appendChild(btnImprimir);
+    const self = this;
+    btnImprimir.addEventListener("click", function() {
+      let nFactura = self.numFactura; 
+      self.imprimirFactura(nFactura);
+    });
+  
     //btnImprimir.addEventListener("click", imprimirFactura(this.numFactura));
 
     const btnEliminar = document.createElement("button");
@@ -140,6 +148,39 @@ export class Factura {
     $("#dades_article").show();
   }
 
+  imprimirFactura(nFactura) {
+   
+    let factura = Factura.arrayFactures.find(function (f) {
+      return f.numFactura === nFactura; 
+  });
+    
+    if (factura !== undefined) {
+     
+        let finestra = window.open("", "MsgWindow", "width=200,height=100");
+        finestra.document.write("<h1 style='text-align:center'>Factures SaPa</h1>");
+       
+        finestra.document.write("<table style='width:400px; border: 1px solid black;'><tr><th>Data Factura</th><td>" + factura.data + "</td><th>Numero de factura</th><td>" + factura.numFactura + "</td></tr>");
+        finestra.document.write("</table>");
+        finestra.document.write("<br>");
+
+        finestra.document.write("<table style='width:400px; border: 1px solid black;'><tr><th>Nif: </th><td>" + factura.nif + "</td><th>Nom: </th><td>" + factura.client + "</td></tr><tr><th>Adreca: </th><td>Carrer odkjadiajda</td><th>Poblacio</th><td>Blanes</td></tr>");
+        finestra.document.write("</table>");
+        finestra.document.write("<br>");
+
+
+        finestra.document.write("<p>Telefon: " + factura.telefon + "</p>");
+        finestra.document.write("<p>Correu: " + factura.email + "</p>");
+        finestra.document.write("<p>Pagat: " + factura.pagat + "</p>");
+
+       
+        finestra.print();
+       
+        finestra.close();
+    }
+}
   
 
 }
+
+
+

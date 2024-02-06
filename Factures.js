@@ -32,6 +32,32 @@ function init() {
     $("#guardarArt").click(guardarArticles);
 }
 
+document.getElementById("recuperar").addEventListener("click", function() {
+    document.getElementById('arxiuJson').click();
+});
+
+document.getElementById('arxiuJson').addEventListener('change', function() {
+    const file = this.files[0];
+    const reader = new FileReader();
+
+    reader.onload = function() {
+        const factures = JSON.parse(reader.result);
+        const tbody = document.querySelector("table tbody");
+    //tbody.innerHTML = ''; 
+    factures.forEach(factura => {
+        const tr = document.createElement("tr");
+        Object.values(factura).forEach(valor => {
+            const td = document.createElement("td");
+            td.textContent = valor;
+            tr.appendChild(td);
+        });
+        tbody.appendChild(tr);
+    });
+    };
+
+    reader.readAsText(file);
+});
+
 let factures = [];
 
 $('#factura').on('submit', function(event) {
@@ -46,7 +72,13 @@ $('#factura').on('submit', function(event) {
     let descompte = parseFloat(document.getElementById('dte').value);
     let iva = parseFloat(document.getElementById('iva').value);
     let factura = new Factura(dataFactura, nif, nom, telefon, email, descompte, pagada, iva);
+    factures.push(factura);
     taulaEventListeners();
+});
+
+document.getElementById("guardar").addEventListener("click", function(){
+    let jsonFactures = JSON.stringify(factures);
+    download(`factures_${Date.now()}.json`, jsonFactures);
 });
 
 function crearTaulaEditable()
