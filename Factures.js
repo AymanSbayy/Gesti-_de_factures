@@ -3,6 +3,16 @@
 import { Factura } from "./Classes/Factura.js";
 import { Article } from "./Classes/Article.js";
 
+
+function download(filename, text) {
+    const file = new Blob([text], {type: 'text/plain'});
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(file);
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(a.href);
+}
+
 $(document).ready(init);
 let contador = 0;
 
@@ -22,6 +32,7 @@ function init() {
     $("#guardarArt").click(guardarArticles);
 }
 
+let factures = [];
 
 $('#factura').on('submit', function(event) {
     event.preventDefault();
