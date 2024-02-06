@@ -28,7 +28,6 @@ export class Factura {
   const IVA = baseImp * this.iva / 100;
   const total = baseImp + IVA;
 
-  // Actualiza las celdas en el documento
   const tdSubtotal = document.getElementById("tdSubtotal_" + this.numFactura);
   if (tdSubtotal) tdSubtotal.textContent = this.subtotal_.toFixed(2) + "€"; // Asegura 2 decimales
 
@@ -44,6 +43,43 @@ export class Factura {
   const tdTotal = document.getElementById("tdTotal_" + this.numFactura);
   if (tdTotal) tdTotal.textContent = total.toFixed(2) + "€";
   }
+
+  set setData(data) {
+    this.data = data;
+    const tdData = document.getElementById("tdData_" + this.numFactura);
+    if (tdData) tdData.textContent = this.data;
+  }
+
+  set setNif(nif) {
+    this.nif = nif;
+    const tdNif = document.getElementById("tdNif_" + this.numFactura);
+    if (tdNif) tdNif.textContent = this.nif;
+  }
+
+  set setClient(client) {
+    this.client = client;
+    const tdClient = document.getElementById("tdClient_" + this.numFactura);
+    if (tdClient) tdClient.textContent = this.client;
+  }
+
+  set setTelefon(telefon) {
+    this.telefon = telefon;
+    const tdTelefon = document.getElementById("tdTelefon_" + this.numFactura);
+    if (tdTelefon) tdTelefon.textContent = this.telefon;
+  }
+
+  set setEmail(email) {
+    this.email = email;
+    const tdEmail = document.getElementById("tdEmail_" + this.numFactura);
+    if (tdEmail) tdEmail.textContent = this.email;
+  }
+
+  set setPagat(pagat) {
+    this.pagat = pagat;
+    const tdPagat = document.getElementById("tdPagat_" + this.numFactura);
+    if (tdPagat) tdPagat.textContent = this.pagat ? "Sí" : "No";
+  }
+
 
   mostrarFactura() {
     const tbody = document.querySelector("table tbody");
@@ -181,6 +217,8 @@ export class Factura {
     globalThis.num = numFactura;
     $("#insertFact").hide();
     $("#editFact").show();
+    $("#dte").hide();
+    $("#iva").hide();	
   }
 
   editarArticle(numFactura) {

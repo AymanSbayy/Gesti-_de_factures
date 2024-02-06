@@ -80,27 +80,30 @@ function init() {
   });
   $("#nouArticle").click(crearTaulaEditable);
   $("#guardarArt").click(guardarArticles);
+  $("#editFact").click(editarFactura);
 }
 
-$("#editFact").on("click", function () {
+function editarFactura() {
     let dataFactura = document.getElementById("data_factura").value;
     let pagada = document.getElementById("pagada").checked;
     let nif = document.getElementById("nif").value;
     let nom = document.getElementById("nom").value;
     let telefon = document.getElementById("telefon").value;
     let email = document.getElementById("email").value;
-    let descompte = parseFloat(document.getElementById("dte").value);
-    let iva = parseFloat(document.getElementById("iva").value);
-    
+
     let numFactura = globalThis.num;
     let factura = facturess.find((factura) => factura.numFactura === numFactura);
-    factura.dataFactura = dataFactura;
-    factura.pagada = pagada;
-    factura.nif = nif;
-    factura.nom = nom;
-    factura.telefon = telefon;
-    factura.email = email;
-    });
+    factura.setData = dataFactura;
+    factura.setPagat = pagada;
+    factura.setNif = nif;
+    factura.setClient = nom;
+    factura.setTelefon = telefon;
+    factura.setEmail = email;
+
+    $("#dades_factura").hide();
+    $("#dte").show();
+    $("#iva").show();	
+}
 
 $("#factura").on("submit", function (event) {
   event.preventDefault();
@@ -283,7 +286,7 @@ export function imprimirFactura(nFactura) {
         let facturaEncontrada = facturess.find((factura) => factura.id === nFactura);
 
         if (facturaEncontrada) {
-            let finestra = window.open("", "MsgWindow", "width=200,height=100");
+            let finestra = window.open("", "MsgWindow");
 
             finestra.document.write(`<h1 style='text-align:center'>Factures SaPa</h1>
                 <table style='width:400px; border: 1px solid black;'>
