@@ -1,11 +1,10 @@
 "use strict";
 
-import { Article } from "./Article.js";
-
 
 export class Factura {
   static arrayFactures = [];
   static numFactura = 0;
+  static subtotal_;
   constructor(data, nif, client, telefon, email, descompte, pagat, iva) {
     Factura.numFactura++;
     this.numFactura = Factura.numFactura;
@@ -17,11 +16,21 @@ export class Factura {
     this.descompte = descompte;
     this.pagat = pagat;
     this.iva = iva;
-    this.cesta = [];
+    this.subtotal_ = 0;
     this.mostrarFactura();
   }
 
+<<<<<<< HEAD
   
+=======
+  //Setters
+
+  set subtotal(subtotal) {
+    this.subtotal_ = subtotal;
+    this.mostrarFactura();
+  }
+
+>>>>>>> aa36f50a0f21dfadbf24cd456a729ab15d7e24c7
 
   agregarArticulo(articulo) {
     this.cesta.push(articulo);
@@ -149,6 +158,7 @@ export class Factura {
 
   editarFactura(numFactura) {
     $("#dades_article").show();
+<<<<<<< HEAD
   }
 
   imprimirFactura(nFactura) {
@@ -195,10 +205,107 @@ export class Factura {
         finestra.print();
        
         
-    }
-}
-  
+=======
+    globalThis.num = numFactura;
 
+    if (existeIdFactura(numFactura)) {
+      const tabla = document.querySelector("#miTabla");
+      const tbody = tabla.querySelector("tbody");
+      let articlesArray = globalThis.articless;
+      if (!Array.isArray(articlesArray)) {
+        throw new Error("articlesArray no es una matriz válida");
+      } else {
+        for (const article of articlesArray) {
+          if (article.idFactura === numFactura) {
+            const tr = document.createElement("tr");
+
+            const tdCodi = document.createElement("td");
+            tdCodi.textContent = article.codi;
+            tr.appendChild(tdCodi);
+
+            const tdArticle = document.createElement("td");
+            tdArticle.textContent = article.article;
+            tdArticle.contentEditable = true;
+            tr.appendChild(tdArticle);
+
+            const tdUnitats = document.createElement("td");
+            tdUnitats.textContent = article.unitats;
+            tdUnitats.contentEditable = true;
+            tr.appendChild(tdUnitats);
+
+            const tdPreu = document.createElement("td");
+            tdPreu.textContent = article.preu;
+            tdPreu.contentEditable = true;
+            tr.appendChild(tdPreu);
+
+            const tdSubtotal = document.createElement("td");
+            tdSubtotal.textContent = article.unitats * article.preu;
+            tr.appendChild(tdSubtotal);
+
+            const upButton = document.createElement("button");
+            upButton.id = article.codi;
+            const upImg = document.createElement("img");
+            upImg.src = "./Imatges/up.svg"; 
+            const downButton = document.createElement("button");
+            downButton.id = article.codi;
+            const downImg = document.createElement("img");
+            downImg.src = "./Imatges/down.svg";
+            const tdAccions = document.createElement("td");
+            const eliminarBtn = document.createElement("button");
+            eliminarBtn.id = article.codi;
+            const eliminarImg = document.createElement("img");
+            eliminarImg.src = "./Imatges/delete.svg";
+            upButton.appendChild(upImg);
+            downButton.appendChild(downImg);
+            eliminarBtn.appendChild(eliminarImg);
+            tdAccions.appendChild(upButton);
+            tdAccions.appendChild(downButton);
+            tdAccions.appendChild(eliminarBtn);
+            tr.appendChild(tdAccions);
+            tbody.appendChild(tr);
+
+            upButton.addEventListener("click", function() {
+              let tr = this.parentElement.parentElement;
+              let trAnterior = tr.previousElementSibling;
+              if (trAnterior != null) {
+                trAnterior.before(tr);
+              }
+            });
+
+            downButton.addEventListener("click", function() {
+              let tr = this.parentElement.parentElement;
+              let trSeguent = tr.nextElementSibling;
+              if (trSeguent != null) {
+                trSeguent.after(tr);
+              }
+            });
+
+            eliminarBtn.addEventListener("click", function() {
+              let tr = this.parentElement.parentElement;
+              tr.remove();
+            });
+          }
+        }
+      }
+    } else {
+      return;
+>>>>>>> aa36f50a0f21dfadbf24cd456a729ab15d7e24c7
+    }
+  }
+}
+
+function existeIdFactura(numFactura) {
+  let articlesArray = globalThis.articless;
+  if (!Array.isArray(articlesArray)) {
+    throw new Error("articlesArray no es una matriz válida");
+  }
+
+  for (const article of articlesArray) {
+    if (article.idFactura === numFactura) {
+      return true;
+    }
+  }
+  return false;
 }
 
 
