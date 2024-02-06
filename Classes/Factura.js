@@ -1,6 +1,5 @@
 "use strict";
-
-
+import { imprimirFactura} from "../Factures.js";
 export class Factura {
   static numFactura = 0;
   static subtotal_;
@@ -118,7 +117,12 @@ export class Factura {
     imgImprimir.alt = "Imprimir";
     btnImprimir.appendChild(imgImprimir);
     tdAcciones.appendChild(btnImprimir);
-    //btnImprimir.addEventListener("click", imprimirFactura(this.numFactura));
+   // btnImprimir.addEventListener("click", this.imprimirFactura(this.numFactura));
+   btnImprimir.addEventListener("click", function() {
+    imprimirFactura(this.numFactura);
+  });
+
+ 
 
     const btnEliminar = document.createElement("button");
     btnEliminar.id = this.numFactura;
@@ -230,6 +234,11 @@ export class Factura {
       return;
     }
   }
+
+  
+
+
+
 }
 
 function existeIdFactura(numFactura) {
@@ -245,3 +254,5 @@ function existeIdFactura(numFactura) {
   }
   return false;
 }
+
+

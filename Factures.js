@@ -4,13 +4,49 @@ import { Factura } from "./Classes/Factura.js";
 import { Article } from "./Classes/Article.js";
 
 function download(filename, text) {
-  const file = new Blob([text], { type: "text/plain" });
+  const file = new Blob([text], { type: "text/json" });
   const a = document.createElement("a");
   a.href = URL.createObjectURL(file);
   a.download = filename;
   a.click();
   URL.revokeObjectURL(a.href);
 }
+
+//Guardar i recuperar factures
+let factures = [];
+      
+document.getElementById("recuperar").addEventListener("click", function() {
+  document.getElementById('arxiuJson').click();
+});
+
+
+document.getElementById('arxiuJson').addEventListener('change', function() {
+  const file = this.files[0];
+  const reader = new FileReader();
+
+  reader.onload = function() {
+      const factures = JSON.parse(reader.result);
+      const tbody = document.querySelector("table tbody");
+ // tbody.innerHTML = ''; 
+  factures.forEach(factura => {
+      const tr = document.createElement("tr");
+      Object.values(factura).forEach(valor => {
+          const td = document.createElement("td");
+          td.textContent = valor;
+          tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+  });
+  };
+
+  reader.readAsText(file);
+});
+
+
+document.getElementById("guardar").addEventListener("click", function(){
+  let jsonFactures = JSON.stringify(facturess);
+  download(`factures_${Date.now()}.json`, jsonFactures);
+});
 
 let articless = [];
 let facturess = [];
@@ -65,6 +101,7 @@ $("#factura").on("submit", function (event) {
     pagada,
     iva
   );
+  
     facturess.push(factura);
   taulaEventListeners();
 });
@@ -113,6 +150,8 @@ function crearTaulaEditable() {
   tr.appendChild(tdAccions);
   tbody.appendChild(tr);
 
+
+
   upButton.addEventListener("click", function () {
     let tr = this.parentElement.parentElement;
     let trAnterior = tr.previousElementSibling;
@@ -132,6 +171,10 @@ function crearTaulaEditable() {
     tr.remove();
   });
 }
+
+
+
+
 
 function guardarArticles() {
   const tabla = document.querySelector("#miTabla");
@@ -208,3 +251,49 @@ function actualizarTotal() {
     totalArticlesElement.textContent = subtotal.toFixed(2) + "€";
   }
 }
+
+
+export function imprimirFactura(nFactura) {
+    console.log(nFactura);
+      
+       if (facturess !== undefined) { 
+       
+         let finestra = window.open("", "MsgWindow", "width=200,height=100");
+         
+          finestra.document.write(`<h1 style='text-align:center'>Factures SaPa</h1>
+          <table style='width:400px; border: 1px solid black;'>
+          <tr>
+          <th>Data Factura</th>  <td>  ${facturess.dataFactura}  </td>
+          <th>Numero de factura</th> <td> ${nFactura} </td>
+          </tr>
+          </table>
+    
+          <br>
+    
+          <table style='width:400px; border: 1px solid black;'>
+          <tr>
+          <th>NIF: </th> <td> ${facturess.nif} </td>
+          <th>Nom: </th> <td> ${ facturess.nom} </td>
+          </tr>
+          <tr>
+          <th> Adreca: </th> <td>Carrer AiguaViva </td>
+          <th>Poblacio</th> <td>Blanes</td>
+          </tr>
+        </table>
+    
+        <br>
+    
+        <p>Telefon: ${facturess.telefon} </p>
+        <p>Correu: ${facturess.email }</p>
+        <p>Pagat: ${facturess.pagada }</p>
+    
+          `);
+  
+          finestra.print();
+         // window.close();
+       }
+    
+      } 
+
+      
+
