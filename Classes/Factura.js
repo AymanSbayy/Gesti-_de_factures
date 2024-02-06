@@ -2,7 +2,6 @@
 
 
 export class Factura {
-  static arrayFactures = [];
   static numFactura = 0;
   static subtotal_;
   constructor(data, nif, client, telefon, email, descompte, pagat, iva) {
@@ -31,8 +30,6 @@ export class Factura {
   agregarArticulo(articulo) {
     this.cesta.push(articulo);
   }
-
- 
 
   mostrarFactura() {
     const tbody = document.querySelector("table tbody");
@@ -121,12 +118,6 @@ export class Factura {
     imgImprimir.alt = "Imprimir";
     btnImprimir.appendChild(imgImprimir);
     tdAcciones.appendChild(btnImprimir);
-    const self = this;
-    btnImprimir.addEventListener("click", function() {
-      let nFactura = self.numFactura; 
-      self.imprimirFactura(nFactura);
-    });
-  
     //btnImprimir.addEventListener("click", imprimirFactura(this.numFactura));
 
     const btnEliminar = document.createElement("button");
@@ -154,55 +145,6 @@ export class Factura {
 
   editarFactura(numFactura) {
     $("#dades_article").show();
-
-  }
-
-  imprimirFactura(nFactura) {
-   
-    
-    let factura = Factura.arrayFactures.find(function (f) {
-      return f.numFactura === nFactura; 
-  }); 
-    
-     if (factura !== undefined) { 
-     
-        //let finestra = window.open("", "MsgWindow", "width=200,height=100");
-        finestra.document.write(`<h1 style='text-align:center'>Factures SaPa</h1>
-        <table style='width:400px; border: 1px solid black;'>
-        <tr>
-        <th>Data Factura</th>  <td>  ${factura.data}  </td>
-        <th>Numero de factura</th> <td> ${factura.numFactura} </td>
-        </tr>
-        </table>
-
-        <br>
-
-        <table style='width:400px; border: 1px solid black;'>
-        <tr>
-        <th>NIF: </th> <td> ${factura.nif} </td>
-        <th>Nom: </th> <td> ${ factura.client} </td>
-        </tr>
-        <tr>
-        <th> Adreca: </th> <td>Carrer AiguaViva </td>
-        <th>Poblacio</th> <td>Blanes</td>
-        </tr>
-      </table>
-
-      <br>
-
-      <p>Telefon: ${factura.telefon} </p>
-      <p>Correu: ${factura.email }</p>
-      <p>Pagat: ${factura.pagat }</p>
-
-        `);
-       
-      
-       
-        finestra.print();
-     }
-    } 
-        
-    existeix(){
     globalThis.num = numFactura;
 
     if (existeIdFactura(numFactura)) {
@@ -286,7 +228,6 @@ export class Factura {
       }
     } else {
       return;
-
     }
   }
 }
@@ -304,6 +245,3 @@ function existeIdFactura(numFactura) {
   }
   return false;
 }
-
-
-
