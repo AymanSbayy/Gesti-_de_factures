@@ -5,7 +5,7 @@ import { Article } from "./Classes/Article.js";
 
 
 function download(filename, text) {
-    const file = new Blob([text], {type: 'text/plain'});
+    const file = new Blob([text], {type: 'text/json'});
     const a = document.createElement('a');
     a.href = URL.createObjectURL(file);
     a.download = filename;

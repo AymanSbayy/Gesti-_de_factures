@@ -4,6 +4,7 @@ import { Article } from "./Article.js";
 
 
 export class Factura {
+  static arrayFactures = [];
   static numFactura = 0;
   constructor(data, nif, client, telefon, email, descompte, pagat, iva) {
     Factura.numFactura++;
@@ -20,11 +21,13 @@ export class Factura {
     this.mostrarFactura();
   }
 
+  
+
   agregarArticulo(articulo) {
     this.cesta.push(articulo);
   }
 
-  static arrayFactures = [];
+ 
 
   mostrarFactura() {
     const tbody = document.querySelector("table tbody");
@@ -150,32 +153,48 @@ export class Factura {
 
   imprimirFactura(nFactura) {
    
+    
     let factura = Factura.arrayFactures.find(function (f) {
       return f.numFactura === nFactura; 
-  });
+  }); 
     
-    if (factura !== undefined) {
+     if (factura !== undefined) { 
      
-        let finestra = window.open("", "MsgWindow", "width=200,height=100");
-        finestra.document.write("<h1 style='text-align:center'>Factures SaPa</h1>");
+        //let finestra = window.open("", "MsgWindow", "width=200,height=100");
+        finestra.document.write(`<h1 style='text-align:center'>Factures SaPa</h1>
+        <table style='width:400px; border: 1px solid black;'>
+        <tr>
+        <th>Data Factura</th>  <td>  ${factura.data}  </td>
+        <th>Numero de factura</th> <td> ${factura.numFactura} </td>
+        </tr>
+        </table>
+
+        <br>
+
+        <table style='width:400px; border: 1px solid black;'>
+        <tr>
+        <th>NIF: </th> <td> ${factura.nif} </td>
+        <th>Nom: </th> <td> ${ factura.client} </td>
+        </tr>
+        <tr>
+        <th> Adreca: </th> <td>Carrer AiguaViva </td>
+        <th>Poblacio</th> <td>Blanes</td>
+        </tr>
+      </table>
+
+      <br>
+
+      <p>Telefon: ${factura.telefon} </p>
+      <p>Correu: ${factura.email }</p>
+      <p>Pagat: ${factura.pagat }</p>
+
+        `);
        
-        finestra.document.write("<table style='width:400px; border: 1px solid black;'><tr><th>Data Factura</th><td>" + factura.data + "</td><th>Numero de factura</th><td>" + factura.numFactura + "</td></tr>");
-        finestra.document.write("</table>");
-        finestra.document.write("<br>");
-
-        finestra.document.write("<table style='width:400px; border: 1px solid black;'><tr><th>Nif: </th><td>" + factura.nif + "</td><th>Nom: </th><td>" + factura.client + "</td></tr><tr><th>Adreca: </th><td>Carrer odkjadiajda</td><th>Poblacio</th><td>Blanes</td></tr>");
-        finestra.document.write("</table>");
-        finestra.document.write("<br>");
-
-
-        finestra.document.write("<p>Telefon: " + factura.telefon + "</p>");
-        finestra.document.write("<p>Correu: " + factura.email + "</p>");
-        finestra.document.write("<p>Pagat: " + factura.pagat + "</p>");
-
+      
        
         finestra.print();
        
-        finestra.close();
+        
     }
 }
   
