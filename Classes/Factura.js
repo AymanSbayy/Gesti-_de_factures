@@ -23,12 +23,27 @@ export class Factura {
 
   set subtotal(subtotal) {
     this.subtotal_ = subtotal;
-    this.mostrarFactura();
-  }
 
+  const descompte = this.subtotal_ * this.descompte / 100;
+  const baseImp = this.subtotal_ - descompte;
+  const IVA = baseImp * this.iva / 100;
+  const total = baseImp + IVA;
 
-  agregarArticulo(articulo) {
-    this.cesta.push(articulo);
+  // Actualiza las celdas en el documento
+  const tdSubtotal = document.getElementById("tdSubtotal_" + this.numFactura);
+  if (tdSubtotal) tdSubtotal.textContent = this.subtotal_.toFixed(2) + "€"; // Asegura 2 decimales
+
+  const tdDescompte = document.getElementById("tdDescompte_" + this.numFactura);
+  if (tdDescompte) tdDescompte.textContent = descompte.toFixed(2) + "€";
+
+  const tdBaseImp = document.getElementById("tdBaseImp_" + this.numFactura);
+  if (tdBaseImp) tdBaseImp.textContent = baseImp.toFixed(2) + "€";
+
+  const tdIva = document.getElementById("tdIva_" + this.numFactura);
+  if (tdIva) tdIva.textContent = IVA.toFixed(2) + "€";
+
+  const tdTotal = document.getElementById("tdTotal_" + this.numFactura);
+  if (tdTotal) tdTotal.textContent = total.toFixed(2) + "€";
   }
 
   mostrarFactura() {
@@ -36,50 +51,62 @@ export class Factura {
     const tr = document.createElement("tr");
 
     const tdNumFactura = document.createElement("td");
+    tdNumFactura.id = "tdNumFactura_" + this.numFactura;
     tdNumFactura.textContent = this.numFactura;
     tr.appendChild(tdNumFactura);
 
     const tdData = document.createElement("td");
+    tdData.id = "tdData_" + this.numFactura;
     tdData.textContent = this.data;
     tr.appendChild(tdData);
 
     const tdNif = document.createElement("td");
+    tdNif.id = "tdNif_" + this.numFactura;
     tdNif.textContent = this.nif;
     tr.appendChild(tdNif);
 
     const tdClient = document.createElement("td");
+    tdClient.id = "tdClient_" + this.numFactura;
     tdClient.textContent = this.client;
     tr.appendChild(tdClient);
 
     const tdTelefon = document.createElement("td");
+    tdTelefon.id = "tdTelefon_" + this.numFactura;
     tdTelefon.textContent = this.telefon;
     tr.appendChild(tdTelefon);
 
     const tdEmail = document.createElement("td");
+    tdEmail.id = "tdEmail_" + this.numFactura;
     tdEmail.textContent = this.email;
     tr.appendChild(tdEmail);
 
     const tdSubtotal = document.createElement("td");
-    tdSubtotal.textContent = "";
+    tdSubtotal.id = "tdSubtotal_" + this.numFactura;
+    tdSubtotal.textContent = "0 €";
     tr.appendChild(tdSubtotal);
 
     const tdDescompte = document.createElement("td");
-    tdDescompte.textContent = this.descompte;
+    tdDescompte.id = "tdDescompte_" + this.numFactura;
+    tdDescompte.textContent = "0 €";
     tr.appendChild(tdDescompte);
 
     const tdBaseImp = document.createElement("td");
-    tdBaseImp.textContent = "";
+    tdBaseImp.id = "tdBaseImp_" + this.numFactura;
+    tdBaseImp.textContent = "0 €";
     tr.appendChild(tdBaseImp);
 
     const tdIva = document.createElement("td");
-    tdIva.textContent = this.iva;
+    tdIva.id = "tdIva_" + this.numFactura;
+    tdIva.textContent = "0 €";
     tr.appendChild(tdIva);
 
     const tdTotal = document.createElement("td");
-    tdTotal.textContent = "";
+    tdTotal.id = "tdTotal_" + this.numFactura;
+    tdTotal.textContent = "0 €";
     tr.appendChild(tdTotal);
 
     const tdPagat = document.createElement("td");
+    tdPagat.id = "tdPagat_" + this.numFactura;
     tdPagat.textContent = this.pagat ? "Sí" : "No";
     tr.appendChild(tdPagat);
 
@@ -94,7 +121,9 @@ export class Factura {
     imgEditar.alt = "Editar";
     btnEditar.appendChild(imgEditar);
     tdAcciones.appendChild(btnEditar);
-    //btnEditar.addEventListener("click", editarFactura(this.numFactura));
+    btnEditar.addEventListener("click", () => {
+      this.editarFactura(this.numFactura);
+    });
 
     const btnEditArt = document.createElement("button");
     btnEditArt.id = this.numFactura;
@@ -106,7 +135,7 @@ export class Factura {
     btnEditArt.appendChild(imgEditArt);
     tdAcciones.appendChild(btnEditArt);
     btnEditArt.addEventListener("click", () => {
-      this.editarFactura(this.numFactura);
+      this.editarArticle(this.numFactura);
     });
 
     const btnImprimir = document.createElement("button");
@@ -144,6 +173,13 @@ export class Factura {
   }
 
   editarFactura(numFactura) {
+    $("#dades_factura").show();
+    globalThis.num = numFactura;
+    $("#insertFact").hide();
+    $("#editFact").show();
+  }
+
+  editarArticle(numFactura) {
     $("#dades_article").show();
     globalThis.num = numFactura;
 
