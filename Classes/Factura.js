@@ -31,6 +31,8 @@ export class Factura {
     this.cesta.push(articulo);
   }
 
+  static arrayFactures = [];
+
   mostrarFactura() {
     const tbody = document.querySelector("table tbody");
     const tr = document.createElement("tr");
@@ -118,6 +120,12 @@ export class Factura {
     imgImprimir.alt = "Imprimir";
     btnImprimir.appendChild(imgImprimir);
     tdAcciones.appendChild(btnImprimir);
+    const self = this;
+    btnImprimir.addEventListener("click", function() {
+      let nFactura = self.numFactura; 
+      self.imprimirFactura(nFactura);
+    });
+  
     //btnImprimir.addEventListener("click", imprimirFactura(this.numFactura));
 
     const btnEliminar = document.createElement("button");
@@ -245,3 +253,6 @@ function existeIdFactura(numFactura) {
   }
   return false;
 }
+
+
+
