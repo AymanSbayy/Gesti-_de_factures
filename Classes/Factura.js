@@ -20,9 +20,6 @@ export class Factura {
     this.mostrarFactura();
   }
 
-<<<<<<< HEAD
-  
-=======
   //Setters
 
   set subtotal(subtotal) {
@@ -30,7 +27,6 @@ export class Factura {
     this.mostrarFactura();
   }
 
->>>>>>> aa36f50a0f21dfadbf24cd456a729ab15d7e24c7
 
   agregarArticulo(articulo) {
     this.cesta.push(articulo);
@@ -158,7 +154,7 @@ export class Factura {
 
   editarFactura(numFactura) {
     $("#dades_article").show();
-<<<<<<< HEAD
+
   }
 
   imprimirFactura(nFactura) {
@@ -203,9 +199,10 @@ export class Factura {
       
        
         finestra.print();
-       
+     }
+    } 
         
-=======
+    existeix(){
     globalThis.num = numFactura;
 
     if (existeIdFactura(numFactura)) {
@@ -289,7 +286,7 @@ export class Factura {
       }
     } else {
       return;
->>>>>>> aa36f50a0f21dfadbf24cd456a729ab15d7e24c7
+
     }
   }
 }

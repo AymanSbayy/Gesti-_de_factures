@@ -4,21 +4,13 @@ import { Factura } from "./Classes/Factura.js";
 import { Article } from "./Classes/Article.js";
 
 function download(filename, text) {
-<<<<<<< HEAD
+
     const file = new Blob([text], {type: 'text/json'});
     const a = document.createElement('a');
     a.href = URL.createObjectURL(file);
     a.download = filename;
     a.click();
     URL.revokeObjectURL(a.href);
-=======
-  const file = new Blob([text], { type: "text/plain" });
-  const a = document.createElement("a");
-  a.href = URL.createObjectURL(file);
-  a.download = filename;
-  a.click();
-  URL.revokeObjectURL(a.href);
->>>>>>> aa36f50a0f21dfadbf24cd456a729ab15d7e24c7
 }
 
 let articless = [];
