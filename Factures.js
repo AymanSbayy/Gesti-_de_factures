@@ -279,42 +279,44 @@ function actualizarTotal() {
 export function imprimirFactura(nFactura) {
     console.log(nFactura);
       
-       if (facturess !== undefined) { 
-       
-         let finestra = window.open("", "MsgWindow", "width=200,height=100");
-         
-          finestra.document.write(`<h1 style='text-align:center'>Factures SaPa</h1>
-          <table style='width:400px; border: 1px solid black;'>
-          <tr>
-          <th>Data Factura</th>  <td>  ${facturess.dataFactura}  </td>
-          <th>Numero de factura</th> <td> ${nFactura} </td>
-          </tr>
-          </table>
-    
-          <br>
-    
-          <table style='width:400px; border: 1px solid black;'>
-          <tr>
-          <th>NIF: </th> <td> ${facturess.nif} </td>
-          <th>Nom: </th> <td> ${ facturess.nom} </td>
-          </tr>
-          <tr>
-          <th> Adreca: </th> <td>Carrer AiguaViva </td>
-          <th>Poblacio</th> <td>Blanes</td>
-          </tr>
-        </table>
-    
-        <br>
-    
-        <p>Telefon: ${facturess.telefon} </p>
-        <p>Correu: ${facturess.email }</p>
-        <p>Pagat: ${facturess.pagada }</p>
-    
-          `);
-  
-          finestra.print();
-         // window.close();
-       }
+    if (facturess !== undefined) {
+        let facturaEncontrada = facturess.find((factura) => factura.id === nFactura);
+
+        if (facturaEncontrada) {
+            let finestra = window.open("", "MsgWindow", "width=200,height=100");
+
+            finestra.document.write(`<h1 style='text-align:center'>Factures SaPa</h1>
+                <table style='width:400px; border: 1px solid black;'>
+                <tr>
+                <th>Data Factura</th>  <td>  ${facturaEncontrada.dataFactura}  </td>
+                <th>Numero de factura</th> <td> ${nFactura} </td>
+                </tr>
+                </table>
+
+                <br>
+
+                <table style='width:400px; border: 1px solid black;'>
+                <tr>
+                <th>NIF: </th> <td> ${facturaEncontrada.nif} </td>
+                <th>Nom: </th> <td> ${facturaEncontrada.nom} </td>
+                </tr>
+                <tr>
+                <th> Adreca: </th> <td>Carrer AiguaViva </td>
+                <th>Poblacio</th> <td>Blanes</td>
+                </tr>
+                </table>
+
+                <br>
+
+                <p>Telefon: ${facturaEncontrada.telefon} </p>
+                <p>Correu: ${facturaEncontrada.email }</p>
+                <p>Pagat: ${facturaEncontrada.pagada }</p>
+            `);
+
+            finestra.print();
+            // window.close();
+        }
+    }
     
       } 
 
