@@ -147,7 +147,7 @@ export class Factura {
     btnImprimir.appendChild(imgImprimir);
     tdAcciones.appendChild(btnImprimir);
    // btnImprimir.addEventListener("click", this.imprimirFactura(this.numFactura));
-   btnImprimir.addEventListener("click", function() {
+   btnImprimir.addEventListener("click", () => {
     imprimirFactura(this.numFactura);
   });
 
