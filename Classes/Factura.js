@@ -228,11 +228,25 @@ export class Factura {
 
   editarFactura(numFactura) {
     $("#dades_factura").show();
+        //Primero que se pongan los datos de la factura que ya tenemos en el formulario
+
+
+
     globalThis.num = numFactura;
     $("#insertFact").hide();
     $("#editFact").show();
     $("#dte").hide();
     $("#iva").hide();	
+    let facturaData = document.getElementById("data_factura");
+    facturaData.value = this.data;
+    let facturaNif = document.getElementById("nif");
+    facturaNif.value = this.nif;
+    let facturaClient = document.getElementById("client");
+    facturaClient.value = this.client;
+    let facturaTelefon = document.getElementById("telefon");
+    facturaTelefon.value = this.telefon;
+    let facturaEmail = document.getElementById("email");
+    facturaEmail.value = this.email;
   }
 
   editarArticle(numFactura) {

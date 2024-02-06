@@ -62,6 +62,9 @@ function init() {
   $("#dades_article").hide();
   $("#novaFact").click(function () {
     $("#dades_factura").show();
+    $("#iva").show();
+    $("#dte").show();
+
   });
   $("#tancar").click(function () {
     $("#dades_factura").hide();
@@ -196,9 +199,6 @@ function crearTaulaEditable() {
     tr.remove();
   });
 }
-
-
-
 
 
 function guardarArticles() {
