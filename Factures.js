@@ -57,6 +57,7 @@ $(document).ready(init);
 let contador = 0;
 
 function init() {
+  $("#editFact").hide();
   $("#dades_factura").hide();
   $("#dades_article").hide();
   $("#novaFact").click(function () {
@@ -64,6 +65,8 @@ function init() {
   });
   $("#tancar").click(function () {
     $("#dades_factura").hide();
+    $("#insertFact").show();
+    $("#editFact").hide();
   });
   $("#tancar2").click(function () {
     $("#dades_article").hide();
@@ -71,7 +74,6 @@ function init() {
     const tabla = document.querySelector("#miTabla");
     const tbody = tabla.querySelector("tbody");
 
-    // Remove all rows
     while (tbody.firstChild) {
       tbody.removeChild(tbody.firstChild);
     }
@@ -79,6 +81,26 @@ function init() {
   $("#nouArticle").click(crearTaulaEditable);
   $("#guardarArt").click(guardarArticles);
 }
+
+$("#editFact").on("click", function () {
+    let dataFactura = document.getElementById("data_factura").value;
+    let pagada = document.getElementById("pagada").checked;
+    let nif = document.getElementById("nif").value;
+    let nom = document.getElementById("nom").value;
+    let telefon = document.getElementById("telefon").value;
+    let email = document.getElementById("email").value;
+    let descompte = parseFloat(document.getElementById("dte").value);
+    let iva = parseFloat(document.getElementById("iva").value);
+    
+    let numFactura = globalThis.num;
+    let factura = facturess.find((factura) => factura.numFactura === numFactura);
+    factura.dataFactura = dataFactura;
+    factura.pagada = pagada;
+    factura.nif = nif;
+    factura.nom = nom;
+    factura.telefon = telefon;
+    factura.email = email;
+    });
 
 $("#factura").on("submit", function (event) {
   event.preventDefault();
@@ -177,6 +199,7 @@ function crearTaulaEditable() {
 
 
 function guardarArticles() {
+    $("#dades_article").hide();
   const tabla = document.querySelector("#miTabla");
   const tbody = tabla.querySelector("tbody");
   const filas = tbody.querySelectorAll("tr");
@@ -208,9 +231,9 @@ function guardarArticles() {
             }
         }
 
-        let _factura = facturess.find((factura) => factura.idFactura === idFactura);
-        _factura.total = total;
-
+        let factura = facturess.find((factura) => factura.numFactura === idFactura);
+        factura.subtotal = total;
+        
     }
   });
 }
