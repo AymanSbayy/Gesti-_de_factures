@@ -9,6 +9,7 @@ p {margin: 2rem 0 .5rem 0;}
 
 table {border:none; border-collapse:collapse;}
 thead {background-color:lightgrey;}
+tfoot {background-color:lightgrey;}
 th {vertical-align:middle; width:4rem; border:.1rem solid black;}
 td {vertical-align:middle; width:4rem; border:.1rem solid black; text-align:left; white-space:nowrap;}
 td:nth-child(1) {text-align:center;}

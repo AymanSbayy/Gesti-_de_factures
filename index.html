@@ -4,7 +4,7 @@
 <head>
 	<title>Factures SaPa</title>
 	<meta charset="UTF-8" />
-	<link rel="stylesheet" href="estils.css">
+	<link rel="stylesheet" href="Estils/estils.css">
 	<script src="https://code.jquery.com/jquery-3.6.3.min.js"></script>
 	<script type="module" src="Factures.js"></script>
 </head>
@@ -41,24 +41,54 @@
 	<div id="dades_factura" class="dialeg">
 		<div class="centrat">
 			<form id="factura">
-				<div id="tancar" class="tancar"><img src="close.svg"></div>
+				<div id="tancar" class="tancar"><img src="Imatges/close.svg"></div>
 				<h5>Dades de la factura i del client</h5><br>
 				<br>
 				Núm factura <input type="number" id="num_factura" name="num_factura" disabled><br>
-				Data factura <input type="date" id="data_factura" name="data_factura" >
+				Data factura <input type="date" id="data_factura" name="data_factura">
 				<input type="checkbox" id="pagada" name="pagada"> Pagada<br><br>
-				NIF <input style="width: 15rem;" type="text" id="nif" name="nif"  maxlength="9"
+				NIF <input style="width: 15rem;" type="text" id="nif" name="nif" maxlength="9"
 					pattern="[0-9]{8}[A-Za-z]{1}"><br>
-				Nom <input style="width: 15rem;" type="text" id="nom" name="nom" ><br>
-				Telèfon <input type="tel" id="telefon" name="telefon"  pattern="[0-9]{9}"><br>
-				E-mail <input type="email" id="email" name="email" ><br><br>
+				Nom <input style="width: 15rem;" type="text" id="nom" name="nom"><br>
+				Telèfon <input type="tel" id="telefon" name="telefon" pattern="[0-9]{9}"><br>
+				E-mail <input type="email" id="email" name="email"><br><br>
 
-				% Dte <input type="number" id="dte" name="dte"  min="0" max="100" step="0.01"><br>
-				% IVA <input type="number" id="iva" name="iva"  min="0" max="100" step="0.01"><br>
+				% Dte <input type="number" id="dte" name="dte" min="0" max="100" step="0.01"><br>
+				% IVA <input type="number" id="iva" name="iva" min="0" max="100" step="0.01"><br>
 
 				<input type="submit" value="Guardar">
 
 			</form>
+		</div>
+	</div>
+	<div id="dades_article" class="dialeg">
+		<div class="centrat">
+			<div id="tancar2" class="tancar"><img src="Imatges/close.svg"></div>
+			<h2>Detalls de la cistella</h2>
+			<div class="inline">
+				<table id="miTabla">
+					<thead>
+						<tr>
+							<th>Codi</th>
+							<th>Article</th>
+							<th>Uni.</th>
+							<th>Preu</th>
+							<th>Subtotal</th>
+							<th>ACC</th>
+						</tr>
+					</thead>
+					<tfoot>
+						<tr>
+							<td colspan="4">Total articles</td>
+							<td id="totalArticles">0€</td>
+							<td><button id='nouArticle'><img style="padding-top: 2px;"
+										src="Imatges/afegir.svg"></button></td>
+						</tr>
+					</tfoot>
+					<tbody></tbody>
+				</table>
+			</div>
+			<button id="guardarArt">Guardar</button>
 		</div>
 	</div>
 </body>

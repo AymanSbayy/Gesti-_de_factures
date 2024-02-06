@@ -1,25 +1,27 @@
+"use strict";
+
+import { Article } from "./Article.js";
+
+
 export class Factura {
   static numFactura = 0;
-  data;
-  nif;
-  client;
-  telefon;
-  email;
-  pagat;
-  descompte;
-  iva;
-
   constructor(data, nif, client, telefon, email, descompte, pagat, iva) {
-    this.numFactura = ++Factura.numFactura;
+    Factura.numFactura++;
+    this.numFactura = Factura.numFactura;
     this.data = data;
     this.nif = nif;
     this.client = client;
     this.telefon = telefon;
     this.email = email;
-    this.pagat = pagat;
     this.descompte = descompte;
+    this.pagat = pagat;
     this.iva = iva;
+    this.cesta = [];
     this.mostrarFactura();
+  }
+
+  agregarArticulo(articulo) {
+    this.cesta.push(articulo);
   }
 
   mostrarFactura() {
@@ -81,7 +83,7 @@ export class Factura {
     btnEditar.setAttribute("tagName", "btnEditar");
     const imgEditar = document.createElement("img");
     imgEditar.setAttribute("tagName", "btnEditar");
-    imgEditar.src = "edit.svg";
+    imgEditar.src = "./Imatges/edit.svg";
     imgEditar.alt = "Editar";
     btnEditar.appendChild(imgEditar);
     tdAcciones.appendChild(btnEditar);
@@ -92,19 +94,20 @@ export class Factura {
     btnEditArt.setAttribute("tagName", "btnEditArt");
     const imgEditArt = document.createElement("img");
     imgEditArt.setAttribute("tagName", "btnEditArt");
-    imgEditArt.src = "cesta.svg";
+    imgEditArt.src = "./Imatges/cesta.svg";
     imgEditArt.alt = "Editar Article";
     btnEditArt.appendChild(imgEditArt);
     tdAcciones.appendChild(btnEditArt);
-    btnEditArt.addEventListener("click", );
-    
+    btnEditArt.addEventListener("click", () => {
+      this.editarFactura(this.numFactura);
+    });
 
     const btnImprimir = document.createElement("button");
     btnImprimir.id = this.numFactura;
     btnImprimir.setAttribute("tagName", "btnImprimir");
     const imgImprimir = document.createElement("img");
     imgImprimir.setAttribute("tagName", "btnImprimir");
-    imgImprimir.src = "printer.svg";
+    imgImprimir.src = "./Imatges/printer.svg";
     imgImprimir.alt = "Imprimir";
     btnImprimir.appendChild(imgImprimir);
     tdAcciones.appendChild(btnImprimir);
@@ -115,13 +118,13 @@ export class Factura {
     btnEliminar.setAttribute("tagName", "btnEliminar");
     const imgEliminar = document.createElement("img");
     imgEliminar.setAttribute("tagName", "btnEliminar");
-    imgEliminar.src = "delete.svg";
+    imgEliminar.src = "./Imatges/delete.svg";
     imgEliminar.alt = "Eliminar";
     btnEliminar.appendChild(imgEliminar);
     tdAcciones.appendChild(btnEliminar);
     btnEliminar.addEventListener("click", () => {
       this.eliminarFactura(this.numFactura);
-  });
+    });
 
     tr.appendChild(tdAcciones);
 
@@ -133,8 +136,10 @@ export class Factura {
     tr.remove();
   }
 
-  crearArticle()
-  {
-    
+  editarFactura(numFactura) {
+    $("#dades_article").show();
   }
+
+  
+
 }
