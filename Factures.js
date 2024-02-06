@@ -280,48 +280,67 @@ function actualizarTotal() {
 
 
 export function imprimirFactura(nFactura) {
-    console.log(nFactura);
+    
       
     if (facturess !== undefined) {
-        let facturaEncontrada = facturess.find((factura) => factura.id === nFactura);
+        
+        let facturaEncontrada = facturess.find((factura) => factura.numFactura === nFactura);
+        let subtotal_ = facturaEncontrada.getSubtotal;
+        let des = facturaEncontrada.getDescompte;
+        let iva_ = facturaEncontrada.getIva;
+        let descompte = subtotal_ * des / 100;
+        let baseImp = subtotal_ - descompte;
+        let IVA = baseImp * iva_ / 100;
+        let total = baseImp + IVA;
 
         if (facturaEncontrada) {
-            let finestra = window.open("", "MsgWindow");
-
-            finestra.document.write(`<h1 style='text-align:center'>Factures SaPa</h1>
-                <table style='width:400px; border: 1px solid black;'>
-                <tr>
-                <th>Data Factura</th>  <td>  ${facturaEncontrada.dataFactura}  </td>
-                <th>Numero de factura</th> <td> ${nFactura} </td>
-                </tr>
-                </table>
-
-                <br>
-
-                <table style='width:400px; border: 1px solid black;'>
-                <tr>
-                <th>NIF: </th> <td> ${facturaEncontrada.nif} </td>
-                <th>Nom: </th> <td> ${facturaEncontrada.nom} </td>
-                </tr>
-                <tr>
-                <th> Adreca: </th> <td>Carrer AiguaViva </td>
-                <th>Poblacio</th> <td>Blanes</td>
-                </tr>
-                </table>
-
-                <br>
-
-                <p>Telefon: ${facturaEncontrada.telefon} </p>
-                <p>Correu: ${facturaEncontrada.email }</p>
-                <p>Pagat: ${facturaEncontrada.pagada }</p>
+            let finestra = window.open("", "MsgWindow", "width=800,height=600");
+        
+            finestra.document.write(`
+                <html>
+                <head>
+                    <title>Factura</title>
+                    <style>
+                        body { font-family: Arial, sans-serif; margin: 40px; }
+                        h1 { color: #333; }
+                        p { color: #666; }
+                        .factura-info { background-color: #f2f2f2; padding: 20px; border-radius: 10px; }
+                        .pagada-icono {
+                            position: absolute;
+                            top: 50%;
+                            left: 50%;
+                            transform: translate(-50%, -50%);
+                            font-size: 5em;
+                            color: rgba(0, 255, 0, 0.3); /* Opaco */
+                            z-index: -1;
+                        }
+                    </style>
+                </head>
+                <body>
+                    ${facturaEncontrada.pagada ? '<div class="pagada-icono">PAGADA</div>' : ''}
+                    <div class="factura-info">
+                        <h1>Factura</h1>
+                        <p>Data: ${facturaEncontrada.data}</p>
+                        <p>NIF: ${facturaEncontrada.nif}</p>
+                        <p>Nom: ${facturaEncontrada.nom}</p>
+                        <p>Telèfon: ${facturaEncontrada.telefon}</p>
+                        <p>Email: ${facturaEncontrada.email}</p>
+                        <p>Subtotal: ${subtotal_.toFixed(2)}€</p>
+                        <p>Descompte: ${descompte.toFixed(2)}€</p>
+                        <p>Base imposable: ${baseImp.toFixed(2)}€</p>
+                        <p>IVA: ${IVA.toFixed(2)}€</p>
+                        <p>Total: ${total.toFixed(2)}€</p>
+                    </div>
+                </body>
+                </html>
             `);
-
+            finestra.document.close();
             finestra.print();
-            // window.close();
         }
+        
     }
-    
-      } 
+}
+
 
       
 

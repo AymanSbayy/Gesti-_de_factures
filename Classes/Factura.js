@@ -80,6 +80,20 @@ export class Factura {
     if (tdPagat) tdPagat.textContent = this.pagat ? "Sí" : "No";
   }
 
+  //Getters
+
+  get getSubtotal() {
+    return this.subtotal_;
+  }
+
+  get getDescompte() {
+    return this.descompte;
+  }
+
+  get getIva() {
+    return this.iva;
+  }
+
 
   mostrarFactura() {
     const tbody = document.querySelector("table tbody");
